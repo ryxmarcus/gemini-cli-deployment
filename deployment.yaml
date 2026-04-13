@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemini-cli
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gemini-cli
+  template:
+    metadata:
+      labels:
+        app: gemini-cli
+    spec:
+      containers:
+      - name: gemini
+        image: gemini-cli:latest
+        env:
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-secrets
+              key: api-key

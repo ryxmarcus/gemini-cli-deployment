@@ -64,3 +64,4 @@ To maintain security, rotate your credentials periodically. **Never commit raw t
    export GITHUB_TOKEN="your-new-token"
    git push https://x-access-token:${GITHUB_TOKEN}@github.com/ryxmarcus/gemini-cli-deployment.git master
    ```
+

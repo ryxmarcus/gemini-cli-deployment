@@ -40,3 +40,27 @@ To run Gemini CLI as a persistent service/agent in your cluster:
    `kubectl create secret generic gemini-secrets --from-literal=api-key=YOUR_API_KEY`
 3. Deploy to Kubernetes:
    `kubectl apply -f deployment.yaml`
+
+## 🔐 Secret Rotation
+
+To maintain security, rotate your credentials periodically. **Never commit raw tokens or API keys to the repository.**
+
+### Rotating Gemini API Key
+1. Generate a new key in the Google AI Studio.
+2. Update the Kubernetes secret:
+   ```bash
+   kubectl create secret generic gemini-secrets --from-literal=api-key=NEW_API_KEY --dry-run=client -o yaml | kubectl apply -f -
+   ```
+3. Restart the deployment to pick up the new secret:
+   ```bash
+   kubectl rollout restart deployment gemini-cli
+   ```
+
+### Rotating GitHub Personal Access Token (PAT)
+1. Revoke the old token in your GitHub Settings.
+2. Generate a new PAT with the required scopes.
+3. Use the new token for Git operations via environment variables:
+   ```bash
+   export GITHUB_TOKEN="your-new-token"
+   git push https://x-access-token:${GITHUB_TOKEN}@github.com/ryxmarcus/gemini-cli-deployment.git master
+   ```

@@ -4,6 +4,10 @@ This repository contains the configuration and scripts required to deploy the Ge
 
 ## 🏗️ Architecture & Infrastructure
 - **Runtime**: Node.js v20+
+- **Verified Stack**: 
+  - Node.js: `v20.20.2`
+  - npm: `10.8.2`
+  - Gemini CLI: `0.37.2`
 - **Containerization**: Docker (see `Dockerfile`)
 - **Orchestration**: Kubernetes (see `deployment.yaml`)
 - **OS Target**: Linux (Ubuntu/Debian)
@@ -15,6 +19,12 @@ Run the deployment script to install Node.js and Gemini CLI:
 ```bash
 ./deploy.sh
 ```
+
+### Verification
+To verify the local installation and build:
+1. **Check CLI**: `gemini --version`
+2. **Build Test**: `docker build -t gemini-cli:local .`
+3. **K8s Dry Run**: `kubectl apply -f deployment.yaml --dry-run=client` (Requires kubectl)
 
 ### Kubernetes Deployment
 1. **Build Image**: `docker build -t gemini-cli:latest .`

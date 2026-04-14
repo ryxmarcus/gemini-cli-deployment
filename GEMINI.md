@@ -34,6 +34,15 @@ To verify the local installation and build:
 2. **Build Test**: `docker build -t gemini-cli:latest .`
 3. **Local Server Test**: `docker run -p 8080:8080 gemini-cli:latest` and visit `http://localhost:8080`
 
+### REST API Examples (Codespaces)
+When running in GitHub Codespaces, you can interact with the server using the forwarded port:
+```bash
+# Example POST request to /prompt
+curl -X POST https://silver-invention-xjrwrr4694jh9g67-8080.app.github.dev/prompt \
+  -H "Content-Type: application/json" \
+  -d '{"prompt": "Tell me a joke about AI."}'
+```
+
 ### Manual Kubernetes Deployment
 1. **Build Image**: `docker build -t gemini-cli:latest .`
 2. **Secrets**: Create a secret for the API key:

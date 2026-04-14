@@ -27,6 +27,18 @@ app.post('/prompt', (req, res) => {
     });
 });
 
+app.get('/', (req, res) => {
+    res.send({ 
+        message: 'Gemini CLI Web Wrapper is running!',
+        usage: {
+            endpoint: '/prompt',
+            method: 'POST',
+            body: { prompt: 'string' }
+        },
+        health: '/health'
+    });
+});
+
 app.get('/health', (req, res) => {
     res.send({ status: 'OK' });
 });

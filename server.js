@@ -6,6 +6,7 @@ const app = express();
 const port = 8080;
 
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
 app.post('/prompt', (req, res) => {
     const { prompt, model } = req.body;
@@ -28,9 +29,9 @@ app.post('/prompt', (req, res) => {
     });
 });
 
-app.get('/', (req, res) => {
+app.get('/api', (req, res) => {
     res.send({ 
-        message: 'Gemini CLI Web Wrapper is running!',
+        message: 'Gemini CLI Web Wrapper API is running!',
         usage: {
             endpoint: '/prompt',
             method: 'POST',

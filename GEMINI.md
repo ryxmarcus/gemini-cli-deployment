@@ -4,12 +4,14 @@ This repository contains the configuration and scripts required to deploy the Ge
 
 ## 🏗️ Architecture & Infrastructure
 - **Runtime**: Node.js v20+
+- **Web Server**: Express.js wrapper listening on port `8080`
+  - Endpoints: `POST /prompt`, `GET /health`, `GET /`
 - **Verified Stack**: 
   - Node.js: `v20.20.2`
   - npm: `10.8.2`
   - Gemini CLI: `0.37.2`
 - **Containerization**: Docker (see `Dockerfile`)
-- **Orchestration**: Kubernetes (see `deployment.yaml`)
+- **Orchestration**: Kubernetes (see `deployment.yaml`, `service.yaml`)
 - **OS Target**: Linux (Ubuntu/Debian)
 
 ## 🛠️ Key Deployment Commands
@@ -20,13 +22,19 @@ Run the deployment script to install Node.js and Gemini CLI:
 ./deploy.sh
 ```
 
+### Kubernetes Automated Deployment (Recommended)
+Use the automated script to apply the deployment, service, and restart the rollout:
+```bash
+./k8s-deploy.sh
+```
+
 ### Verification
 To verify the local installation and build:
 1. **Check CLI**: `gemini --version`
-2. **Build Test**: `docker build -t gemini-cli:local .`
-3. **K8s Dry Run**: `kubectl apply -f deployment.yaml --dry-run=client` (Requires kubectl)
+2. **Build Test**: `docker build -t gemini-cli:latest .`
+3. **Local Server Test**: `docker run -p 8080:8080 gemini-cli:latest` and visit `http://localhost:8080`
 
-### Kubernetes Deployment
+### Manual Kubernetes Deployment
 1. **Build Image**: `docker build -t gemini-cli:latest .`
 2. **Secrets**: Create a secret for the API key:
    ```bash

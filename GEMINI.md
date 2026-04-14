@@ -42,8 +42,9 @@ To verify the local installation and build:
    ```
 3. **Deploy**: `kubectl apply -f deployment.yaml`
 
-## 🔑 Environment Variables
+## 🔑 Environment Variables & Secrets
 - `GEMINI_API_KEY`: Required for Gemini CLI to function. Managed via Kubernetes secrets in production.
+- `GITHUB_TOKEN` (or `PAT`): Used for authenticated Git operations. Saved in Repository Secrets for automation.
 
 ## 📚 Expanding Knowledge
 To add more context to this knowledge base without modifying this file, you can:
